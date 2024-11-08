@@ -1,7 +1,7 @@
 import { useLibrary } from "./LibraryContext";
 
 export const AddBookForm = () => {
-  const { addBook } = useLibrary(); // Access addBook from context
+  const { addBook } = useLibrary(); // Access addBook directly from context
 
   const submitForm = (event) => {
     event.preventDefault();

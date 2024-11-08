@@ -1,7 +1,8 @@
 import { useLibrary } from "./LibraryContext";
 
 export const Book = ({ book }) => {
-  const { borrowBook, returnBook, removeBook } = useLibrary();
+  const { borrowBook, returnBook, removeBook } = useLibrary(); // Access functions directly
+
   return (
     <>
       <h4>📖 {book.title}</h4>
