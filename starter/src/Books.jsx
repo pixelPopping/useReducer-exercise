@@ -1,3 +1,4 @@
+import { AddbookForm } from "./AddBookForm";
 import { Category } from "./Category";
 import { useLibrary } from "./LibraryContext";
 
@@ -19,6 +20,7 @@ export const Books = () => {
           category={category}
         />
       ))}
+      {AddbookForm}
     </>
   );
 };
