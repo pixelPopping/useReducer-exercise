@@ -1,6 +1,8 @@
 import { useLibrary } from "./LibraryContext";
 
-export const AddbookForm = ({ addBook }) => {
+export const AddBookForm = () => {
+  const { addBook } = useLibrary(); // Access addBook from context
+
   const submitForm = (event) => {
     event.preventDefault();
     addBook({
@@ -9,16 +11,19 @@ export const AddbookForm = ({ addBook }) => {
       category: event.target.elements.category.value,
     });
   };
-};
 
-return (
-  <form onSubmit={submitForm}>
-    <label htmlFor="author">author </label>
-    <input type="text" name="author" />
-    <label htmlFor="title">title:</label>
-    <input type="text" name="title" />
-    <label htmlFor="category">category</label>
-    <input type="text" name="category" />
-    <button type="submit">Add Book</button>
-  </form>
-);
+  return (
+    <form onSubmit={submitForm}>
+      <label htmlFor="author">Author:</label>
+      <input type="text" name="author" required />
+
+      <label htmlFor="title">Title:</label>
+      <input type="text" name="title" required />
+
+      <label htmlFor="category">Category:</label>
+      <input type="text" name="category" required />
+
+      <button type="submit">Add Book</button>
+    </form>
+  );
+};

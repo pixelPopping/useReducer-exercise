@@ -19,7 +19,20 @@ const libraryReducer = (state, action) => {
         book.id === action.id ? { ...book, available: true } : book
       );
     case "remove-book":
-      return state.filter((book) => book.id !== action.id); // Corrected filter logic
+      return state.filter((book) => book.id !== action.id);
+
+    case "add-book":
+      // Create a new book object
+      const newBook = {
+        ...action.book,
+        id: state.length > 0 ? state[state.length - 1].id + 1 : 1, // Increment the last book's ID
+        category: action.book.category.toLowerCase(), // Ensure lowercase category
+        available: true, // Set availability to true
+      };
+
+      // Return a new array with the new book added to the end
+      return [...state, newBook]; // Or use structuredClone([...state, newBook]) if deep cloning is needed
+
     default:
       return state;
   }
@@ -40,9 +53,14 @@ export const LibraryContextProvider = ({ children }) => {
     dispatch({ type: "remove-book", id }); // Corrected action type
   };
 
+  // In LibraryContext.js
+  const addBook = (props) => {
+    dispatch({ type: "add-book", ...props });
+  };
+
   return (
     <LibraryContext.Provider
-      value={{ books, borrowBook, returnBook, removeBook }}
+      value={{ books, borrowBook, returnBook, removeBook, addBook }}
     >
       {children}
     </LibraryContext.Provider>
